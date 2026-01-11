@@ -494,6 +494,19 @@ friends.forEach(friend => {
       const question = questions[index];
       questionText.textContent = question.text;
       questionIcon.querySelector('span').textContent = question.icon;
+
+      // Remove any existing guidance
+      const existingGuidance = document.getElementById('question-guidance');
+      if (existingGuidance) existingGuidance.remove();
+
+      // Add guidance for specific question (index 5)
+      if (index === 5) {
+        const guidance = document.createElement('p');
+        guidance.id = 'question-guidance';
+        guidance.className = 'text-stone-500 text-sm mt-2 text-center max-w-xs';
+        guidance.textContent = "You can check if a material is more sustainable by looking at: Material & sourcing, production quality, care requirements, certifications and long-term wearability.";
+        questionText.parentElement.appendChild(guidance);
+      }
       
       // Update progress dots
       progressDots.innerHTML = '';
