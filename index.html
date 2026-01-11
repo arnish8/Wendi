@@ -3,19 +3,24 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wendi - Sustainable Fashion</title>
+  <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  <title>Wendi - Sustainable Shopping Buddy</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&amp;family=Nunito:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
   <style>
     body {
       box-sizing: border-box;
+      color: var(--text-color);
     }
     * {
       font-family: 'Nunito', sans-serif;
+      color: var(--text-color);
+      
     }
     .title-font {
       font-family: 'Cormorant Garamond', serif;
+      color: var(--text-color);
     }
     .swipe-card {
       touch-action: pan-y;
@@ -79,14 +84,14 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
  </head>
  <body class="h-full bg-stone-100 overflow-hidden">
-  <div id="app-container" class="relative w-full h-full max-w-md mx-auto bg-gradient-to-b from-stone-50 to-amber-50 shadow-2xl overflow-hidden"><!-- Screen 1: Home / Decision Flow -->
+  <div id="app-container" class="relative w-full h-full max-w-md mx-auto bg-gradient-to-b from-amber-50 to-[var(--background-color)] shadow-2xl overflow-hidden"><!-- Screen 1: Home / Decision Flow -->
    <div id="home-screen" class="screen active flex flex-col h-full"><!-- Header -->
     <header class="pt-8 pb-4 px-6 text-center">
-     <h1 id="app-title" class="title-font text-4xl font-semibold text-stone-800 tracking-wide">Wendi</h1>
-     <p id="tagline" class="text-stone-500 text-sm mt-1 tracking-wider">Mindful fashion choices</p>
+     <img src="/images/wendi-logo.png" alt="Logo" class="mx-auto w-24 h-24 rounded-full object-cover mb-4">
+     <p id="tagline" class="text-stone-500 text-sm mt-1 tracking-wider">Sustainable shopping buddy</p>
     </header><!-- Main Content Area -->
-    <div class="flex-1 flex flex-col items-center justify-center px-6 relative overflow-hidden"><!-- Start View -->
-     <div id="start-view" class="flex flex-col items-center">
+    <div class="flex-1 flex flex-col items-center justify-center px-6 relative overflow-hidden text-[var(--text-color)]"><!-- Start View -->
+     <div id="start-view" class="flex flex-col items-center text-[var(--text-color)]">
       <div class="w-32 h-32 mb-8 rounded-full bg-gradient-to-br from-amber-100 to-stone-200 flex items-center justify-center shadow-inner">
        <svg class="w-16 h-16 text-stone-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
        </svg>
@@ -109,7 +114,7 @@
        <div class="text-center">
         <div id="question-icon" class="w-16 h-16 mx-auto mb-4 rounded-full bg-amber-100 flex items-center justify-center"><span class="text-3xl">🤔</span>
         </div>
-        <p id="question-text" class="text-lg text-stone-800 leading-relaxed font-medium"></p>
+        <p id="question-text" class="text-lg text-[var(--text-color)] leading-relaxed font-medium"></p>
        </div>
        <div class="mt-6 flex justify-center space-x-4 text-xs text-stone-400"><span>← Swipe left for No</span> <span>•</span> <span>Swipe right for Yes →</span>
        </div>
@@ -120,7 +125,7 @@
       <div id="result-card" class="w-full max-w-sm bg-white rounded-3xl shadow-xl p-6 text-center my-auto">
        <div id="result-icon" class="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center"><span class="text-3xl"></span>
        </div>
-       <h2 id="result-title" class="text-xl font-semibold text-stone-800 mb-3"></h2>
+       <h2 id="result-title" class="text-xl font-semibold text-[var(--text-color)] mb-3"></h2>
        <p id="result-message" class="text-stone-600 leading-relaxed text-sm"></p>
       </div>
      </div>
@@ -248,14 +253,22 @@
     // Default configuration
     const defaultConfig = {
       app_title: 'Wendi',
-      tagline: 'Mindful fashion choices',
+      tagline: 'Sustainable shopping buddy',
       start_button_text: 'Start',
-      background_color: '#faf5f0',
+      background_color: '#f0e2da',
       surface_color: '#ffffff',
-      text_color: '#292524',
+      text_color: '#40301f',
       primary_action_color: '#292524',
       secondary_action_color: '#d97706'
     };
+
+    // Set CSS variables on the root (entire document)
+    const root = document.documentElement;
+    root.style.setProperty('--background-color', defaultConfig.background_color);
+    root.style.setProperty('--surface-color', defaultConfig.surface_color);
+    root.style.setProperty('--text-color', defaultConfig.text_color);
+    root.style.setProperty('--primary-action-color', defaultConfig.primary_action_color);
+    root.style.setProperty('--secondary-action-color', defaultConfig.secondary_action_color);
 
     // App State
     let currentScreen = 'home';
@@ -871,11 +884,9 @@ friends.forEach(friend => {
     
     // Element SDK initialization
     async function onConfigChange(config) {
-      const title = document.getElementById('app-title');
       const tagline = document.getElementById('tagline');
       const startBtn = document.getElementById('start-btn');
       
-      if (title) title.textContent = config.app_title || defaultConfig.app_title;
       if (tagline) tagline.textContent = config.tagline || defaultConfig.tagline;
       if (startBtn) startBtn.textContent = config.start_button_text || defaultConfig.start_button_text;
       
