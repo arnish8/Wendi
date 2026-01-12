@@ -299,9 +299,10 @@
       { text: "Will you wear this item more than one time?", icon: "👗", yesPath: 5, noPath: 8 },
       { text: "Do you need this item?", icon: "🤔", yesPath: 3, noPath: 'outcome-c' },
       { text: "Is this a timeless and sustainable choice for you?", icon: "🌿", yesPath: 6, noPath: 'outcome-d' },
-      { text: "Will you wear this item more than 30 times?", icon: "📊", yesPath: 7, noPath: 'outcome-e' },
+      { text: "Will you wear this item more than 30 times?", icon: "📊", yesPath: 7, noPath: 9 },
       { text: "Can you acquire this item sustainably? (vintage, second-hand, or rental)", icon: "♻️", yesPath: 'outcome-f', noPath: 'outcome-g' },
-      { text: "Can you rent or borrow this item?", icon: "🤝", yesPath: 'outcome-h', noPath: 'outcome-d' }
+      { text: "Can you rent or borrow this item?", icon: "🤝", yesPath: 'outcome-h', noPath: 'outcome-i' },
+      { text: "Can you acquire this item sustainably? (vintage, second-hand, or rental)", icon: "🛍️", yesPath: 'outcome-e', noPath: 'outcome-j' }
     ];
     
     // Updated results based on new outcomes
@@ -337,7 +338,7 @@
       'outcome-e': {
         icon: '📊',
         title: 'Mindful Wear',
-        message: "Even though you won't wear this as often as sustainably advised, you can still appreciate its value. Try to wear it at least 10 times to combat fast fashion. Can you acquire this item sustainably through vintage, second-hand, or rental?",
+        message: "Even though you won't wear this as often as sustainably advised, you can still appreciate its value. Try to wear it at least 10 times to combat fast fashion.",
         color: 'bg-orange-100'
       },
       'outcome-f': {
@@ -349,7 +350,7 @@
       'outcome-g': {
         icon: '🌍',
         title: 'Consider Alternatives',
-        message: "Consider avoiding buying new fast-fashion items. Look for alternative sustainable options like vintage, second-hand, or rental.",
+        message: "Consider avoiding buying new fast-fashion items. Look for alternative sustainable options like vintage, second-hand, or rental. However, you will sustainably use this item even when bought new.",
         color: 'bg-rose-100'
       },
       'outcome-h': {
@@ -357,7 +358,20 @@
         title: 'Borrow or Rent!',
         message: "You can borrow or rent this item sustainably. This is a fantastic way to enjoy fashion while minimizing environmental impact!",
         color: 'bg-teal-100'
-      }
+      },
+      'outcome-i': {
+        icon: '❌',
+        title: 'Error: Sustainability not found!',
+        message: "You cannot acquire this item sustainably. Still in the mood for something else, check the closet of your friends.",
+        showFriendsButton: true,
+        color: 'bg-purple-100'
+      },
+      'outcome-j': {
+        icon: '📊',
+        title: 'Mindful Wear',
+        message: "Although you may not wear this item often or acquire it sustainably, aim to wear it at least 20 times to help counter fast fashion.",
+        color: 'bg-orange-100'
+      },
     };
     
     // Sample items for friends' closets
@@ -505,6 +519,49 @@ friends.forEach(friend => {
         guidance.id = 'question-guidance';
         guidance.className = 'text-stone-500 text-sm mt-2 text-center max-w-xs';
         guidance.textContent = "You can check if a material is more sustainable by looking at: Material & sourcing, production quality, care requirements, certifications and long-term wearability.";
+        questionText.parentElement.appendChild(guidance);
+      }
+
+      if (index === 8) {
+        const guidance = document.createElement('p');
+        guidance.id = 'question-guidance';
+        guidance.className = 'text-stone-500 text-sm mt-2 text-center max-w-xs';
+        guidance.innerHTML = `Look in the closet of your friends or on websites to rent clothes such as
+        <a href="https://lena-library.com/" target="_blank" class="text-amber-600 underline">Lena Library</a>, 
+        <a href="https://www.rentglam.nl/" target="_blank" class="text-amber-600 underline">Rentglam</a> and 
+        <a href="https://www.wauwcloset.nl/" target="_blank" class="text-amber-600 underline">Wauwcloset</a>. 
+        For more clothing libraries, <a href="https://www.thegreenlist.nl/en/the-best-clothing-libraries-in-the-netherlands/" target="_blank" class="text-amber-600 underline">click here</a>.`;
+        questionText.parentElement.appendChild(guidance);
+      }
+
+
+      if (index === 7) {
+        const guidance = document.createElement('p');
+        guidance.id = 'question-guidance';
+        guidance.className = 'text-stone-500 text-sm mt-2 text-center max-w-xs';
+        guidance.innerHTML = `For vintage and second-hand clothes look at places such as local vintage shops like 
+        <a href="https://www.kilokilovintage.nl/" target="_blank" class="text-amber-600 underline">Kilo kilo</a>,
+        <a href="https://www.vinted.com/" target="_blank" class="text-amber-600 underline">Vinted</a> or
+        <a href="https://www.marktplaats.nl/" target="_blank" class="text-amber-600 underline">Marktplaats</a>. For renting clothes please look at places such as 
+        <a href="https://lena-library.com/" target="_blank" class="text-amber-600 underline">Lena Library</a>, 
+        <a href="https://www.rentglam.nl/" target="_blank" class="text-amber-600 underline">Rentglam</a> and 
+        <a href="https://www.wauwcloset.nl/" target="_blank" class="text-amber-600 underline">Wauwcloset</a>. 
+        For more clothing libraries, <a href="https://www.thegreenlist.nl/en/the-best-clothing-libraries-in-the-netherlands/" target="_blank" class="text-amber-600 underline">click here</a>.`;
+        questionText.parentElement.appendChild(guidance);
+      }
+
+      if (index === 9) {
+        const guidance = document.createElement('p');
+        guidance.id = 'question-guidance';
+        guidance.className = 'text-stone-500 text-sm mt-2 text-center max-w-xs';
+        guidance.innerHTML = `For vintage and second-hand clothes look at places such as local vintage shops like 
+        <a href="https://www.kilokilovintage.nl/" target="_blank" class="text-amber-600 underline">Kilo kilo</a>,
+        <a href="https://www.vinted.com/" target="_blank" class="text-amber-600 underline">Vinted</a> or
+        <a href="https://www.marktplaats.nl/" target="_blank" class="text-amber-600 underline">Marktplaats</a>. For renting clothes please look at places such as 
+        <a href="https://lena-library.com/" target="_blank" class="text-amber-600 underline">Lena Library</a>, 
+        <a href="https://www.rentglam.nl/" target="_blank" class="text-amber-600 underline">Rentglam</a> and 
+        <a href="https://www.wauwcloset.nl/" target="_blank" class="text-amber-600 underline">Wauwcloset</a>. 
+        For more clothing libraries, <a href="https://www.thegreenlist.nl/en/the-best-clothing-libraries-in-the-netherlands/" target="_blank" class="text-amber-600 underline">click here</a>.`;
         questionText.parentElement.appendChild(guidance);
       }
       
